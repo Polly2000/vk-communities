@@ -17,6 +17,7 @@ import '@vkontakte/vkui/dist/vkui.css';
 import { useAppDispatch } from './redux/store';
 import { getGroups } from './redux/groups/asyncActions';
 import { selectGroups } from './redux/groups/selectors';
+import Filters from './components/Filters/Filters';
 import Logo from './assets/img/vk_logo.png';
 
 const App = () => {
@@ -27,7 +28,9 @@ const App = () => {
   console.log(data);
 
   useEffect(() => {
-    dispatch(getGroups());
+    setTimeout(() => {
+      dispatch(getGroups());
+    }, 1000);
   }, []);
 
   return (
@@ -39,9 +42,8 @@ const App = () => {
               <PanelHeader>
                 <img src={Logo} alt="Logo" />
               </PanelHeader>
-              <Group header={<Header mode="secondary">Items</Header>}>
-                <SimpleCell>Hello</SimpleCell>
-                <SimpleCell>World</SimpleCell>
+              <Group header={<Header mode="secondary">Сообщества</Header>}>
+                <Filters />
               </Group>
             </Panel>
           </View>
