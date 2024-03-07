@@ -17,6 +17,7 @@ import { useAppDispatch } from './redux/store';
 import { getGroups } from './redux/groups/asyncActions';
 import { selectGroups } from './redux/groups/selectors';
 import Filters from './components/Filters/Filters';
+import GroupItem from './components/GroupItem/GroupItem';
 import Logo from './assets/img/vk_logo.png';
 
 const App = () => {
@@ -43,6 +44,11 @@ const App = () => {
               </PanelHeader>
               <Group header={<Header mode="secondary">Сообщества</Header>}>
                 <Filters />
+                <div style={{ marginTop: '20px' }}>
+                  {data?.map((item: any) => {
+                    return <GroupItem key={item.id} {...item} />;
+                  })}
+                </div>
               </Group>
             </Panel>
           </View>

@@ -40,7 +40,6 @@ const Filters = () => {
 
   const [color, setColor] = useState<string[]>([]);
   const [colorsCount, setColorsCount] = useState<number>(0);
-  console.log(colorsCount);
 
   const openModal = () => {
     setFiltersModalOpened(true);
@@ -82,7 +81,7 @@ const Filters = () => {
                 </PanelHeaderButton>
               )
             }>
-            Цвет
+            Цвет аватара группы
           </ModalPageHeader>
         }>
         <FormLayoutGroup>
