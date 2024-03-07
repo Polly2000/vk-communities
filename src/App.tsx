@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import {
   AppRoot,
   SplitLayout,
@@ -12,10 +13,22 @@ import {
   usePlatform,
 } from '@vkontakte/vkui';
 import '@vkontakte/vkui/dist/vkui.css';
+
+import { useAppDispatch } from './redux/store';
+import { getGroups } from './redux/groups/asyncActions';
+import { selectGroups } from './redux/groups/selectors';
 import Logo from './assets/img/vk_logo.png';
 
 const App = () => {
   const platform = usePlatform();
+  const dispatch = useAppDispatch();
+  const { result, data } = useSelector(selectGroups);
+  console.log(result);
+  console.log(data);
+
+  useEffect(() => {
+    dispatch(getGroups());
+  }, []);
 
   return (
     <AppRoot>
