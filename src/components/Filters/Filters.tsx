@@ -38,8 +38,9 @@ const Filters = () => {
   const [isClosedGroup, setIsClosedGroup] = useState<boolean>(false);
   const [friendsGroup, setFriendsGroup] = useState<boolean>(false);
 
-  const [color, setColor] = useState(['Красный']);
-  const [colorsCount, setColorsCount] = useState(0);
+  const [color, setColor] = useState<string[]>([]);
+  const [colorsCount, setColorsCount] = useState<number>(0);
+  console.log(colorsCount);
 
   const openModal = () => {
     setFiltersModalOpened(true);
@@ -61,7 +62,6 @@ const Filters = () => {
   const applyFilters = () => {
     let count = 0;
 
-    color.length && count++;
     color.length && count++;
 
     closeModal();
@@ -86,7 +86,7 @@ const Filters = () => {
           </ModalPageHeader>
         }>
         <FormLayoutGroup>
-          <FormItem top="Стиль">
+          <FormItem>
             {COLORS.map(({ value, label }) => {
               return (
                 <Checkbox
@@ -158,6 +158,14 @@ const Filters = () => {
         </SubnavigationButton>
         <SubnavigationButton
           before={<Icon24Filter />}
+          after={
+            colorsCount > 0 && (
+              <Counter size="s">
+                <VisuallyHidden>Применено: </VisuallyHidden>
+                {colorsCount}
+              </Counter>
+            )
+          }
           selected={colorsCount > 0}
           expandable
           onClick={openModal}>

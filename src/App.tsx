@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import {
   AppRoot,
@@ -9,7 +9,6 @@ import {
   PanelHeader,
   Header,
   Group,
-  SimpleCell,
   usePlatform,
 } from '@vkontakte/vkui';
 import '@vkontakte/vkui/dist/vkui.css';
