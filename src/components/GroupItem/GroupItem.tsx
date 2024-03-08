@@ -16,6 +16,16 @@ const GroupItem: FC<Group> = ({ id, name, closed, avatar_color, members_count, f
       ? 5
       : 6;
 
+  const followerCase = ['подписчик', 'подписчика', 'подписчиков'];
+  const declOfNum = (number: number, titles: string[]) => {
+    const cases = [2, 0, 1, 1, 1, 2];
+    return (
+      number +
+      ' ' +
+      titles[number % 100 > 4 && number % 100 < 20 ? 2 : cases[number % 10 < 5 ? number % 10 : 5]]
+    );
+  };
+
   return (
     <div style={{ marginBottom: '10px' }}>
       <SimpleCell
@@ -43,7 +53,7 @@ const GroupItem: FC<Group> = ({ id, name, closed, avatar_color, members_count, f
           <Spacing size={6} />
           <div style={{ display: 'flex', gap: '12px', flexDirection: 'row' }}>
             <Caption level="1" style={{ color: '#828282' }}>
-              {members_count} подписчиков
+              {declOfNum(members_count, followerCase)}
             </Caption>
             <Caption level="1" style={{ color: '#828282' }}>
               Количество друзей:
