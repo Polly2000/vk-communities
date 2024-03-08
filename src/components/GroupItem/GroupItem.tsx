@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { SimpleCell, Avatar, Text, Caption, Spacing } from '@vkontakte/vkui';
 import { Group } from '../../redux/groups/types';
 import FriendsBlock from './FriendsBlock';
+import classes from './GroupItem.module.css';
 
 const GroupItem: FC<Group> = ({ id, name, closed, avatar_color, members_count, friends }) => {
   const color =
@@ -28,7 +29,7 @@ const GroupItem: FC<Group> = ({ id, name, closed, avatar_color, members_count, f
   };
 
   return (
-    <div style={{ marginBottom: '20px' }}>
+    <div className={classes.group}>
       <SimpleCell
         expandable="auto"
         before={
@@ -51,7 +52,7 @@ const GroupItem: FC<Group> = ({ id, name, closed, avatar_color, members_count, f
             </Caption>
           )}
           <Spacing size={6} />
-          <div style={{ display: 'flex', gap: '12px', flexDirection: 'row', height: '100%' }}>
+          <div className={classes.followers}>
             <Caption level="1" style={{ color: '#828282', width: '110px' }}>
               {declOfNum(members_count, followerCase)}
             </Caption>

@@ -27,12 +27,12 @@ const FriendsBlock: FC<any> = ({ friends }) => {
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'row' }}>
+    <div className={classes.friendBlock}>
       <Caption level="1" onClick={() => clickedHandler()} className={classes.friends}>
         Друзья: {friendsCount}
       </Caption>
       {friendsClicked === true && (
-        <div className={classes.friendBlock}>
+        <div className={classes.userFriends}>
           {friends.map((item: User, index: number) => (
             <Caption key={index}>{`${item.first_name} ${item.last_name}`}</Caption>
           ))}
