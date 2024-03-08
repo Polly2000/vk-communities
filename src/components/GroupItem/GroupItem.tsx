@@ -3,12 +3,33 @@ import { SimpleCell, Avatar, Text, Caption, Spacing } from '@vkontakte/vkui';
 import { Group } from '../../redux/groups/types';
 
 const GroupItem: FC<Group> = ({ id, name, closed, avatar_color, members_count, friends }) => {
+  const color =
+    avatar_color === 'red'
+      ? 1
+      : avatar_color === 'orange'
+      ? 2
+      : avatar_color === 'yellow'
+      ? 3
+      : avatar_color === 'green'
+      ? 4
+      : avatar_color === 'blue'
+      ? 5
+      : avatar_color === 'purple'
+      ? 6
+      : 6;
+
   return (
     <div style={{ marginBottom: '10px' }}>
       <SimpleCell
         // onClick={() => setActivePanel('nothing')}
         expandable="auto"
-        before={<Avatar size={80} style={{ background: `${avatar_color}` }} />}>
+        before={
+          avatar_color !== undefined ? (
+            <Avatar size={80} gradientColor={color} />
+          ) : (
+            <Avatar size={80} style={{ backgroundColor: `${avatar_color}` }} />
+          )
+        }>
         <div>
           <Text weight="2">{name}</Text>
           <Spacing size={6} />
@@ -32,7 +53,6 @@ const GroupItem: FC<Group> = ({ id, name, closed, avatar_color, members_count, f
           </div>
         </div>
       </SimpleCell>
-      {/* <div style={{ borderBottom: '1px solid #828282' }} /> */}
     </div>
   );
 };
