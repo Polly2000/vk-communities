@@ -14,8 +14,6 @@ const GroupItem: FC<Group> = ({ id, name, closed, avatar_color, members_count, f
       ? 4
       : avatar_color === 'blue'
       ? 5
-      : avatar_color === 'purple'
-      ? 6
       : 6;
 
   return (
@@ -24,7 +22,7 @@ const GroupItem: FC<Group> = ({ id, name, closed, avatar_color, members_count, f
         // onClick={() => setActivePanel('nothing')}
         expandable="auto"
         before={
-          avatar_color !== undefined ? (
+          avatar_color !== undefined && avatar_color !== 'white' ? (
             <Avatar size={80} gradientColor={color} />
           ) : (
             <Avatar size={80} style={{ backgroundColor: `${avatar_color}` }} />
