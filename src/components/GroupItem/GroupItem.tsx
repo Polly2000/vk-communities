@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { SimpleCell, Avatar, Text, Caption, Spacing } from '@vkontakte/vkui';
 import { Group } from '../../redux/groups/types';
+import FriendsBlock from './FriendsBlock';
 
 const GroupItem: FC<Group> = ({ id, name, closed, avatar_color, members_count, friends }) => {
   const color =
@@ -27,15 +28,14 @@ const GroupItem: FC<Group> = ({ id, name, closed, avatar_color, members_count, f
   };
 
   return (
-    <div style={{ marginBottom: '10px' }}>
+    <div style={{ marginBottom: '20px' }}>
       <SimpleCell
-        // onClick={() => setActivePanel('nothing')}
         expandable="auto"
         before={
           avatar_color !== undefined && avatar_color !== 'white' ? (
-            <Avatar size={80} gradientColor={color} />
+            <Avatar size={100} gradientColor={color} />
           ) : (
-            <Avatar size={80} style={{ backgroundColor: `${avatar_color}` }} />
+            <Avatar size={100} style={{ backgroundColor: `${avatar_color}` }} />
           )
         }>
         <div>
@@ -51,13 +51,11 @@ const GroupItem: FC<Group> = ({ id, name, closed, avatar_color, members_count, f
             </Caption>
           )}
           <Spacing size={6} />
-          <div style={{ display: 'flex', gap: '12px', flexDirection: 'row' }}>
-            <Caption level="1" style={{ color: '#828282' }}>
+          <div style={{ display: 'flex', gap: '12px', flexDirection: 'row', height: '100%' }}>
+            <Caption level="1" style={{ color: '#828282', width: '110px' }}>
               {declOfNum(members_count, followerCase)}
             </Caption>
-            <Caption level="1" style={{ color: '#828282' }}>
-              Количество друзей:
-            </Caption>
+            {friends && <FriendsBlock friends={friends} />}
           </div>
         </div>
       </SimpleCell>

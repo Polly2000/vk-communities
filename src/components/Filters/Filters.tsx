@@ -14,7 +14,6 @@ import {
   SubnavigationBar,
   SubnavigationButton,
   VisuallyHidden,
-  platform,
   usePlatform,
 } from '@vkontakte/vkui';
 import { Icon24Filter, Icon24Dismiss } from '@vkontakte/icons';
@@ -29,6 +28,7 @@ const Filters = () => {
     { value: 'purple', label: 'Фиолетовый' },
     { value: 'white', label: 'Белый' },
     { value: 'orange', label: 'Оранжевый' },
+    { value: '0', label: 'Без аватара' },
   ];
   const platform = usePlatform();
 
