@@ -44,11 +44,11 @@ const GroupItem: FC<Group> = ({ id, name, closed, avatar_color, members_count, f
           <Spacing size={6} />
           {closed ? (
             <Caption level="1" style={{ color: '#828282' }}>
-              Открытая группа
+              Закрытая группа
             </Caption>
           ) : (
             <Caption level="1" style={{ color: '#828282' }}>
-              Закрытая группа
+              Открытая группа
             </Caption>
           )}
           <Spacing size={6} />

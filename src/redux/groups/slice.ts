@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { getGroups } from './asyncActions';
+import { getGroups, getGroupsWithFriends } from './asyncActions';
 import { GetGroupsResponse, Group } from './types';
 
 const initialState: GetGroupsResponse = {
@@ -23,6 +23,18 @@ const groupsSlice = createSlice({
         state.result = 1;
       })
       .addCase(getGroups.rejected, (state) => {
+        state.data = [];
+        state.result = 0;
+      })
+      .addCase(getGroupsWithFriends.pending, (state) => {
+        state.data = [];
+        state.result = 0;
+      })
+      .addCase(getGroupsWithFriends.fulfilled, (state, action: PayloadAction<Group[]>) => {
+        state.data = action.payload;
+        state.result = 1;
+      })
+      .addCase(getGroupsWithFriends.rejected, (state) => {
         state.data = [];
         state.result = 0;
       });

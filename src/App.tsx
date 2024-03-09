@@ -14,8 +14,9 @@ import {
 import '@vkontakte/vkui/dist/vkui.css';
 
 import { useAppDispatch } from './redux/store';
-import { getGroups } from './redux/groups/asyncActions';
+import { getGroups, getGroupsWithFriends } from './redux/groups/asyncActions';
 import { selectGroups } from './redux/groups/selectors';
+import { selectFilter } from './redux/filter/selectors';
 import Filters from './components/Filters/Filters';
 import GroupItem from './components/GroupItem/GroupItem';
 import Logo from './assets/img/vk_logo.png';
@@ -23,15 +24,24 @@ import Logo from './assets/img/vk_logo.png';
 const App = () => {
   const platform = usePlatform();
   const dispatch = useAppDispatch();
+  const { filterValue, friends, avatarColor } = useSelector(selectFilter);
   const { result, data } = useSelector(selectGroups);
   console.log(result);
   console.log(data);
+  console.log('filter value: ' + filterValue);
+  console.log('friends: ' + friends);
 
   useEffect(() => {
-    setTimeout(() => {
-      dispatch(getGroups());
-    }, 1000);
-  }, []);
+    if (friends === true) {
+      setTimeout(() => {
+        dispatch(getGroupsWithFriends());
+      }, 1000);
+    } else {
+      setTimeout(() => {
+        dispatch(getGroups({ filterValue }));
+      }, 1000);
+    }
+  }, [friends, filterValue]);
 
   return (
     <AppRoot>
