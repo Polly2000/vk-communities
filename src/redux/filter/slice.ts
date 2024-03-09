@@ -4,7 +4,7 @@ import { Filter } from './types';
 const initialState: Filter = {
   filterValue: '',
   friends: null,
-  avatarColor: '',
+  avatarColor: [],
 };
 
 const filterSlice = createSlice({
@@ -18,8 +18,8 @@ const filterSlice = createSlice({
     setFriends(state, action: PayloadAction<boolean>) {
       state.friends = action.payload;
     },
-    setAvatarColor(state, action: PayloadAction<string>) {
-      state.filterValue = action.payload;
+    setAvatarColor(state, action: PayloadAction<any>) {
+      state.avatarColor = action.payload;
     },
   },
 });

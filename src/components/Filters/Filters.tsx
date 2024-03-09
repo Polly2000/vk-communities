@@ -18,10 +18,9 @@ import {
 import { Icon24Filter, Icon24Dismiss } from '@vkontakte/icons';
 
 import { useAppDispatch } from '../../redux/store';
-import { setFilterValue, setFriends } from '../../redux/filter/slice';
+import { setFilterValue, setFriends, setAvatarColor } from '../../redux/filter/slice';
 
 const Filters = () => {
-  const dispatch = useAppDispatch();
   const MODAL_NAME = 'filters';
   const COLORS = [
     { value: 'red', label: 'Красный' },
@@ -31,8 +30,9 @@ const Filters = () => {
     { value: 'purple', label: 'Фиолетовый' },
     { value: 'white', label: 'Белый' },
     { value: 'orange', label: 'Оранжевый' },
-    { value: '0', label: 'Без аватара' },
+    { value: 'any', label: 'Любой' },
   ];
+  const dispatch = useAppDispatch();
   const platform = usePlatform();
 
   const [filtersModalOpened, setFiltersModalOpened] = useState<boolean>(false);
@@ -43,6 +43,9 @@ const Filters = () => {
   const [isClosedGroup, setIsClosedGroup] = useState<boolean>(false);
   const [friendsGroup, setFriendsGroup] = useState<boolean>(false);
   const [color, setColor] = useState<string[]>([]);
+
+  console.log(color);
+  console.log(colorsCount);
 
   const openModal = () => {
     setFiltersModalOpened(true);
@@ -62,9 +65,18 @@ const Filters = () => {
   };
 
   const applyFilters = () => {
-    let count = 0;
-    color.length && count++;
+    let count = color.length;
+
     closeModal();
+
+    let request = '';
+    if (color.length) {
+      color.map((item: string) => {
+        dispatch(setAvatarColor((request += `&avatar_color=${item}`)));
+      });
+    } else {
+      dispatch(setAvatarColor(''));
+    }
     setColorsCount(count);
   };
 
@@ -127,7 +139,7 @@ const Filters = () => {
         <SubnavigationButton
           selected={isOpenGroup}
           onClick={() => {
-            dispatch(setFilterValue('?closed=false'));
+            dispatch(setFilterValue('closed=false'));
             setIsOpenGroup(true);
             setAllGroups(false);
             setIsClosedGroup(false);
@@ -139,7 +151,7 @@ const Filters = () => {
         <SubnavigationButton
           selected={isClosedGroup}
           onClick={() => {
-            dispatch(setFilterValue('?closed=true'));
+            dispatch(setFilterValue('closed=true'));
             setIsClosedGroup(true);
             setAllGroups(false);
             setIsOpenGroup(false);

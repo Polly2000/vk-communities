@@ -30,18 +30,19 @@ const App = () => {
   console.log(data);
   console.log('filter value: ' + filterValue);
   console.log('friends: ' + friends);
+  console.log('ava: ' + avatarColor);
 
   useEffect(() => {
     if (friends === true) {
       setTimeout(() => {
-        dispatch(getGroupsWithFriends());
+        dispatch(getGroupsWithFriends({ avatarColor }));
       }, 1000);
     } else {
       setTimeout(() => {
-        dispatch(getGroups({ filterValue }));
+        dispatch(getGroups({ filterValue, avatarColor }));
       }, 1000);
     }
-  }, [friends, filterValue]);
+  }, [friends, filterValue, avatarColor]);
 
   return (
     <AppRoot>
