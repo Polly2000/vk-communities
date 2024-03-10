@@ -1,9 +1,3 @@
-export enum Status {
-  LOADING = 'loading',
-  SUCCESS = 'completed',
-  ERROR = 'error',
-}
-
 export interface GetGroupsResponse {
   result: 1 | 0;
   data?: Group[];
