@@ -19,6 +19,17 @@
   bottom: 8px;
   left: 190px;
   right: 10px;
+  background-color: #edebeb;
+  border-radius: 5px;
+  padding: 2px;
+  width: 12%;
+}
+
+.userFriendsDark {
+  position: absolute;
+  bottom: 8px;
+  left: 190px;
+  right: 10px;
   background-color: #282828;
   border-radius: 5px;
   padding: 2px;
