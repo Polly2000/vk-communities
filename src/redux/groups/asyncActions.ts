@@ -4,19 +4,22 @@ import axios from 'axios';
 import { Filter } from '../filter/types';
 import { backUrl } from '../store';
 
-export const getGroups = createAsyncThunk('groups/getGroups', async (params: Filter) => {
-  const { filterValue, avatarColor } = params;
-  try {
-    const { data } = await axios.get(`${backUrl}/groups?${filterValue}${avatarColor}`);
-    return data;
-  } catch (error) {
-    console.log(error);
-  }
-});
+export const getGroups = createAsyncThunk(
+  'groups/getGroups',
+  async (params: Filter, { rejectWithValue }) => {
+    const { filterValue, avatarColor } = params;
+    try {
+      const { data } = await axios.get(`${backUrl}/groups?${filterValue}${avatarColor}`);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  },
+);
 
 export const getGroupsWithFriends = createAsyncThunk(
   'groups/getGroupsWithFriends',
-  async (params: any) => {
+  async (params: any, { rejectWithValue }) => {
     const { avatarColor } = params;
     try {
       const { data } = await axios.get(`${backUrl}/groups`);
@@ -29,7 +32,7 @@ export const getGroupsWithFriends = createAsyncThunk(
 
       return groupsWithFriends;
     } catch (error) {
-      console.log(error);
+      return rejectWithValue(error);
     }
   },
 );

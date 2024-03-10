@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import {
   AppRoot,
@@ -10,6 +10,7 @@ import {
   Header,
   Group,
   usePlatform,
+  SimpleCell,
 } from '@vkontakte/vkui';
 import '@vkontakte/vkui/dist/vkui.css';
 
@@ -26,8 +27,15 @@ const App = () => {
   const dispatch = useAppDispatch();
   const { filterValue, friends, avatarColor } = useSelector(selectFilter);
   const { result, data } = useSelector(selectGroups);
-  console.log(result);
-  console.log(data);
+  const [error, setError] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (result === 0) {
+      setError(true);
+    } else {
+      setError(false);
+    }
+  }, [result]);
 
   useEffect(() => {
     if (friends === true) {
@@ -58,6 +66,14 @@ const App = () => {
                   })}
                 </div>
               </Group>
+              {error && (
+                <Group>
+                  <SimpleCell>
+                    Что-то пошло не так 🙄 К сожалению, данные не получены, попробуйте перезагрузить
+                    страницу
+                  </SimpleCell>
+                </Group>
+              )}
             </Panel>
           </View>
         </SplitCol>

@@ -44,9 +44,6 @@ const Filters = () => {
   const [friendsGroup, setFriendsGroup] = useState<boolean>(false);
   const [color, setColor] = useState<string[]>([]);
 
-  console.log(color);
-  console.log(colorsCount);
-
   const openModal = () => {
     setFiltersModalOpened(true);
   };

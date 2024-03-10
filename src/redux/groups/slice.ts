@@ -4,7 +4,7 @@ import { getGroups, getGroupsWithFriends } from './asyncActions';
 import { GetGroupsResponse, Group } from './types';
 
 const initialState: GetGroupsResponse = {
-  result: 0,
+  result: 1,
   data: [],
 };
 
@@ -16,7 +16,6 @@ const groupsSlice = createSlice({
     builder
       .addCase(getGroups.pending, (state) => {
         state.data = [];
-        state.result = 0;
       })
       .addCase(getGroups.fulfilled, (state, action: PayloadAction<Group[]>) => {
         state.data = action.payload;
@@ -28,7 +27,6 @@ const groupsSlice = createSlice({
       })
       .addCase(getGroupsWithFriends.pending, (state) => {
         state.data = [];
-        state.result = 0;
       })
       .addCase(getGroupsWithFriends.fulfilled, (state, action: PayloadAction<Group[]>) => {
         state.data = action.payload;
