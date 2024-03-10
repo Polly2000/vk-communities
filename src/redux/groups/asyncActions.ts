@@ -1,7 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-import { GetGroupsResponse } from './types';
 import { Filter } from '../filter/types';
 import { backUrl } from '../store';
 
@@ -21,7 +20,13 @@ export const getGroupsWithFriends = createAsyncThunk(
     const { avatarColor } = params;
     try {
       const { data } = await axios.get(`${backUrl}/groups`);
-      const groupsWithFriends = data.filter((group: any) => group.friends);
+
+      const groupsWithFriends = data.filter(
+        (group: any) =>
+          group.friends &&
+          (!avatarColor || (group.avatar_color && avatarColor.includes(group.avatar_color))),
+      );
+
       return groupsWithFriends;
     } catch (error) {
       console.log(error);

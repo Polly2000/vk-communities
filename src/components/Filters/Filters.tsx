@@ -72,7 +72,14 @@ const Filters = () => {
     let request = '';
     if (color.length) {
       color.map((item: string) => {
-        dispatch(setAvatarColor((request += `&avatar_color=${item}`)));
+        if (item === 'any') {
+          const filteredColors = COLORS.filter((color) => color.value !== 'any');
+          const randomIndex = Math.floor(Math.random() * filteredColors.length);
+          const randomColor = COLORS[randomIndex].value;
+          dispatch(setAvatarColor((request += `&avatar_color=${randomColor}`)));
+        } else {
+          dispatch(setAvatarColor((request += `&avatar_color=${item}`)));
+        }
       });
     } else {
       dispatch(setAvatarColor(''));

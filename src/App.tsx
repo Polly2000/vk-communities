@@ -28,9 +28,6 @@ const App = () => {
   const { result, data } = useSelector(selectGroups);
   console.log(result);
   console.log(data);
-  console.log('filter value: ' + filterValue);
-  console.log('friends: ' + friends);
-  console.log('ava: ' + avatarColor);
 
   useEffect(() => {
     if (friends === true) {
